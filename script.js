@@ -78,7 +78,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // New button functionality for "رسلي شروطك دي انشوفها"
     sendConditionsBtn.addEventListener('click', () => {
         sendEmailWithConditions(conditionsTextarea.value);
-        // Add a visual cue that the email is being prepared
         alert('سيتم إرسال شروطك إلى البريد الإلكتروني. يرجى الموافقة على إرسال الرسالة.');
     });
 
@@ -113,7 +112,6 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     
     // --- New Email Sending Functions (using mailto) ---
-    // Function for "رسلي شروطك دي انشوفها" button
     const sendEmailWithConditions = (conditions) => {
         const emailBody = `
             شروط مسامحتي:
@@ -122,7 +120,6 @@ document.addEventListener('DOMContentLoaded', () => {
         window.location.href = `mailto:ahmoma212@gmail.com?subject=شروط المسامحة&body=${encodeURIComponent(emailBody)}`;
     };
 
-    // Function for "تسامحيني مسامحة مبدئية؟" button
     const sendEmailWithInitialForgiveness = () => {
         const emailBody = 'رسالة من منوية: مسامحة مبدئية.';
         window.location.href = `mailto:ahmoma212@gmail.com?subject=هات الخمر يا غلام، منوية سامحتني&body=${encodeURIComponent(emailBody)}`;
