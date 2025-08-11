@@ -48,6 +48,9 @@ body {
     width: 90%;
     z-index: 1;
     margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 /* --- Sticky Notes Section --- */
@@ -94,21 +97,40 @@ body {
     margin: 0;
 }
 
+.sticky-note .caption-english {
+    font-family: 'Times New Roman', Times, serif;
+    font-style: italic;
+    font-size: 16px;
+    margin: 10px 0 0;
+    color: #555;
+    text-align: center;
+}
+
+.memory-images {
+    display: flex;
+    justify-content: space-around;
+    gap: 5px;
+}
+
+.memory-images img {
+    width: 30%;
+    height: auto;
+    border-radius: 5px;
+}
+
 /* --- Main Apology Text --- */
 h1.apology-heading {
     font-size: 48px;
     color: #d32f2f;
-    margin-bottom: 10px;
-}
-
-h2.apology-subheading {
-    font-size: 24px;
-    color: #666;
-    margin-top: 0;
     margin-bottom: 40px;
 }
 
 /* --- Forgiveness Conditions Input --- */
+.input-section {
+    width: 80%;
+    margin: 0 auto;
+}
+
 .input-section label {
     font-size: 22px;
     display: block;
@@ -116,7 +138,7 @@ h2.apology-subheading {
 }
 
 .input-section textarea {
-    width: 80%;
+    width: 100%;
     height: 100px;
     padding: 15px;
     font-family: var(--font-family-main);
@@ -125,6 +147,7 @@ h2.apology-subheading {
     border-radius: 10px;
     resize: vertical;
     transition: all 0.3s ease;
+    box-sizing: border-box;
 }
 
 .input-section textarea:focus {
@@ -133,8 +156,24 @@ h2.apology-subheading {
     box-shadow: 0 0 10px rgba(255, 192, 203, 0.5);
 }
 
+#show-conditions-btn {
+    padding: 12px 24px;
+    font-size: 16px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: background-color 0.3s ease;
+}
+
+#show-conditions-btn:hover {
+    background-color: #2980b9;
+}
+
 /* --- Floating Acceptance Messages --- */
-.acceptance-message {
+.acceptance-message, .angry-floating-message {
     position: fixed;
     background-color: rgba(255, 255, 255, 0.85);
     padding: 8px 15px;
@@ -148,7 +187,7 @@ h2.apology-subheading {
 }
 
 .final-acceptance-message {
-    position: absolute;
+    position: fixed;
     background: rgba(255, 255, 255, 0.95);
     padding: 30px;
     border-radius: 20px;
@@ -180,9 +219,47 @@ h2.apology-subheading {
     font-weight: bold;
 }
 
+/* --- Love Meter Slider --- */
+.love-meter {
+    margin: 40px 0;
+    width: 80%;
+}
+
+.love-meter label {
+    font-size: 22px;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.love-meter input[type="range"] {
+    width: 100%;
+    height: 15px;
+    -webkit-appearance: none;
+    background: #ddd;
+    border-radius: 10px;
+    outline: none;
+}
+
+.love-meter input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 25px;
+    height: 25px;
+    background: var(--primary-pink);
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.love-meter-message {
+    margin-top: 15px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
 /* --- Forgiveness Buttons --- */
 .buttons-container {
     margin-top: 20px;
+    width: 100%;
 }
 
 .forgiveness-buttons {
@@ -225,114 +302,6 @@ h2.apology-subheading {
     transform: translateY(-3px);
 }
 
-.angry-message {
-    margin-top: 20px;
-    font-size: 18px;
-    color: #f44336;
-}
-
-/* --- Memory Slideshow --- */
-.slideshow-container {
-    position: relative;
-    width: 100%;
-    max-width: 600px;
-    margin: 40px auto;
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: 0 5px 20px var(--shadow-color);
-}
-
-.slideshow-image {
-    width: 100%;
-    display: none;
-    animation: fadeIn 1.5s;
-}
-
-.slideshow-image.active {
-    display: block;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-.slideshow-controls {
-    position: absolute;
-    bottom: 10px;
-    left: 10px;
-    z-index: 2;
-}
-
-.slideshow-controls button {
-    background: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
-    padding: 8px 12px;
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 18px;
-}
-
-/* --- Love Meter Slider --- */
-.love-meter {
-    margin: 40px 0;
-}
-
-.love-meter label {
-    font-size: 22px;
-    margin-bottom: 10px;
-    display: block;
-}
-
-.love-meter input[type="range"] {
-    width: 80%;
-    height: 15px;
-    -webkit-appearance: none;
-    background: #ddd;
-    border-radius: 10px;
-    outline: none;
-}
-
-.love-meter input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 25px;
-    height: 25px;
-    background: var(--primary-pink);
-    border-radius: 50%;
-    cursor: pointer;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-}
-
-.love-meter-message {
-    margin-top: 15px;
-    font-size: 18px;
-    font-weight: bold;
-}
-
-/* --- Audio Apology Playback --- */
-.audio-playback {
-    margin: 20px 0;
-}
-
-.audio-playback button {
-    background-color: var(--primary-pink);
-    color: white;
-    padding: 15px 30px;
-    border: none;
-    border-radius: 30px;
-    font-size: 18px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    transition: all 0.3s ease;
-}
-
-.audio-playback button:hover {
-    background-color: #e91e63;
-}
-
 /* --- Animations for button clicks --- */
 .emoji-rain {
     position: fixed;
@@ -365,9 +334,6 @@ h2.apology-subheading {
     h1.apology-heading {
         font-size: 36px;
     }
-    h2.apology-subheading {
-        font-size: 20px;
-    }
     .sticky-notes-container {
         flex-direction: column;
         align-items: center;
@@ -380,11 +346,14 @@ h2.apology-subheading {
         flex-direction: column;
         gap: 15px;
     }
-    .forgiveness-buttons button {
+    .forgiveness-buttons button,
+    #show-conditions-btn {
         width: 100%;
     }
-    .input-section textarea,
-    .love-meter input[type="range"] {
+    .input-section {
+        width: 100%;
+    }
+    .love-meter {
         width: 100%;
     }
 }
