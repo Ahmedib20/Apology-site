@@ -18,31 +18,6 @@ body {
     min-height: 100vh;
 }
 
-/* Google Sign-in Overlay */
-#signin-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 999;
-}
-
-#google-signin-btn {
-    padding: 15px 30px;
-    font-size: 1.5em;
-    background-color: #fff;
-    color: #4285F4;
-    border: 1px solid #4285F4;
-    border-radius: 5px;
-    cursor: pointer;
-    font-family: var(--primary-font);
-}
-
 /* Background gradient and animations */
 .background {
     position: fixed;
