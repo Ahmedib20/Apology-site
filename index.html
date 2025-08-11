@@ -1,62 +1,71 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title> اسف يا حبيبتي 🌹</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Amiri&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>من غيرك حياتي ما ليها طعم</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;700&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <canvas id="heartsCanvas"></canvas>
+    <div class="background-container"></div>
+    <main class="container">
+        <div class="sticky-note top-note yellow">
+            <p>اعـمـلي اسكـريـن عشان أشوف إجابتك ❤️</p>
+        </div>
 
-  <!-- Top Sticky Note -->
-  <div class="sticky-note top-note">
-    اعـمـلي اسكـريـن عشان أشوف إجابتك ❤️
-  </div>
+        <section class="sticky-notes-section">
+            <div class="sticky-note-row">
+                <div class="sticky-note pink image-note">
+                    <img src="your-image.jpg" alt="صورة لك">
+                </div>
+                <div class="sticky-note blue image-note">
+                    <img src="her-image.jpg" alt="صورة لها">
+                </div>
+            </div>
+            <div class="sticky-note-row photos">
+                <div class="sticky-note small yellow image-note">
+                    <img src="shared-photo1.jpg" alt="صورة من ذكرياتنا">
+                </div>
+                <div class="sticky-note small pink image-note">
+                    <img src="shared-photo2.jpg" alt="صورة من ذكرياتنا">
+                </div>
+                <div class="sticky-note small blue image-note">
+                    <img src="shared-photo3.jpg" alt="صورة من ذكرياتنا">
+                </div>
+            </div>
+            <p class="memories-text">ما تبقى من ذكرياتنا، رجاءً لنحافظ عليها</p>
+        </section>
 
-  <!-- Sticky Notes Section -->
-  <section class="sticky-section">
-    <div class="sticky-note pink"><img src="my-photo.jpg" alt="صوري"></div>
-    <div class="sticky-note yellow"><img src="gf-photo.jpg" alt="صورة حبيبتي"></div>
-    <div class="memory-row">
-      <div class="sticky-note blue"><img src="memory1.jpg" alt="ذكرى ١"></div>
-      <div class="sticky-note pink"><img src="memory2.jpg" alt="ذكرى ٢"></div>
-      <div class="sticky-note yellow"><img src="memory3.jpg" alt="ذكرى ٣"></div>
+        <section class="apology-section">
+            <div class="apology-text">
+                <p>
+                    أنا عارف إني غلطت، وأنا آسف من كل قلبي. سامحيني يا حبيبتي. 
+                    من غيرك حياتي ما ليها طعم ولا لون. أنا مستعد أعمل أي شيء 
+                    عشان ترجعي تضحكي تاني وأنسيكي كل حزن.
+                </p>
+            </div>
+            <div class="apology-form">
+                <textarea id="conditions-textarea" placeholder="اكتبي شروطك عشان أسامحك"></textarea>
+                <button id="submit-conditions-btn">كدي انشوف شروطك دي</button>
+            </div>
+        </section>
+
+        <section class="decision-section">
+            <button id="forgive-btn">سامحتيني مسامحة مبدئية؟</button>
+            <button id="not-forgive-btn">مش مسامحاك</button>
+        </section>
+    </main>
+
+    <div id="floating-messages-container"></div>
+    <div id="dialog-overlay">
+        <div id="dialog-box">
+            <p id="dialog-message"></p>
+        </div>
     </div>
-    <p class="memory-caption">
-      What's left of our memories, please let's keep them
-    </p>
-  </section>
-
-  <!-- Apology Section -->
-  <section class="apology-section">
-    <p>
-      حبيبتي، أعتذر من أعماق قلبي على ما حدث. أعلم أنني أخطأت وأتمنى أن تمنحيني فرصة لأصلح كل شيء.
-    </p>
-    <label for="conditions">اكتبي شروطك عشان أسامحك</label>
-    <textarea id="conditions"></textarea>
-    <div id="floating-messages"></div>
-  </section>
-
-  <!-- Conditions Button -->
-  <button id="seeConditions">كدي انشوف شروطك دي</button>
-
-  <!-- Modal -->
-  <div id="modal" class="modal">
-    <div class="modal-content">
-      <p>تم قبول الشروط دون نقاش ❤️</p>
-      <p>اعملي اسكرين ورسلي لي شروطك دي عشان ابت تترسل لي</p>
-      <button id="closeModal">إغلاق</button>
-    </div>
-  </div>
-
-  <!-- Decision Section -->
-  <section class="decision-section">
-    <button id="forgiveBtn">سامحتيني مسامحة مبدئية؟</button>
-    <button id="notForgiveBtn">مش مسامحاك</button>
-  </section>
-
-  <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
