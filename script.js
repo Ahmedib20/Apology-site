@@ -1,81 +1,105 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const conditionsTextarea = document.getElementById('conditions');
-    const conditionsButton = document.getElementById('conditions-button');
-    const forgiveButton = document.getElementById('forgive-button');
-    const notForgiveButton = document.getElementById('not-forgive-button');
-    const floatingMessagesContainer = document.getElementById('floating-messages-container');
-    const dialogOverlay = document.getElementById('dialog-overlay');
-    const dialogText = document.getElementById('dialog-text');
-    const dialogCloseButton = document.getElementById('dialog-close');
+const heartsCanvas = document.getElementById('heartsCanvas');
+const ctx = heartsCanvas.getContext('2d');
+let hearts = [];
+let typingInterval;
 
-    const floatingMessages = [
-        "موافق قبل تكملي يا ست الناس ❤️",
-        "شروطك على راسي يا حياتي",
-        "أنا راضي قبل ما أسمع",
-        "تسلمي لي يا ملاكي"
-    ];
+function resizeCanvas() {
+  heartsCanvas.width = window.innerWidth;
+  heartsCanvas.height = window.innerHeight;
+}
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
 
-    const notForgiveMessages = [
-        "النبي سامحيني، توبة يا حبوبة ❤️",
-        "أنا غلطان، والله آخر مرة",
-        "من غيرك حياتي ما ليها طعم",
-        "سامحيني وابتدي صفحة جديدة",
-        "بحبك مهما حصل"
-    ];
+function drawHeart(x, y, size) {
+  ctx.beginPath();
+  ctx.moveTo(x, y);
+  ctx.bezierCurveTo(x, y - size / 2, x - size, y - size / 2, x - size, y);
+  ctx.bezierCurveTo(x - size, y + size, x, y + size * 1.5, x, y + size * 2);
+  ctx.bezierCurveTo(x, y + size * 1.5, x + size, y + size, x + size, y);
+  ctx.bezierCurveTo(x + size, y - size / 2, x, y - size / 2, x, y);
+  ctx.fillStyle = '#ff4d6d';
+  ctx.fill();
+}
 
-    // Function to show a floating message
-    function showFloatingMessage(message) {
-        const msgDiv = document.createElement('div');
-        msgDiv.className = 'floating-message';
-        msgDiv.textContent = message;
-        msgDiv.style.left = `${Math.random() * 80 + 10}%`; // Random horizontal position
-        msgDiv.style.animationDuration = `${Math.random() * 3 + 4}s`; // Random animation duration
-        floatingMessagesContainer.appendChild(msgDiv);
-        setTimeout(() => msgDiv.remove(), 7000); // Remove message after animation
-    }
+function createHeart() {
+  hearts.push({
+    x: Math.random() * heartsCanvas.width,
+    y: -20,
+    size: 10 + Math.random() * 10,
+    speed: 1 + Math.random() * 2
+  });
+}
 
-    // Function to create a heart rain effect
-    function startHeartRain() {
-        setInterval(() => {
-            const heart = document.createElement('div');
-            heart.classList.add('heart');
-            heart.textContent = '❤️';
-            heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.animationDuration = Math.random() * 2 + 3 + 's';
-            document.body.appendChild(heart);
-            setTimeout(() => heart.remove(), 5000);
-        }, 100);
-    }
+function animateHearts() {
+  ctx.clearRect(0, 0, heartsCanvas.width, heartsCanvas.height);
+  for (let i = 0; i < hearts.length; i++) {
+    const h = hearts[i];
+    drawHeart(h.x, h.y, h.size);
+    h.y += h.speed;
+  }
+  hearts = hearts.filter(h => h.y < heartsCanvas.height);
+  requestAnimationFrame(animateHearts);
+}
+animateHearts();
 
-    // Floating messages on textarea input
-    conditionsTextarea.addEventListener('input', () => {
-        if (conditionsTextarea.value.length > 5 && Math.random() > 0.8) {
-            const randomMessage = floatingMessages[Math.floor(Math.random() * floatingMessages.length)];
-            showFloatingMessage(randomMessage);
-        }
-    });
+function startHeartRain() {
+  const interval = setInterval(createHeart, 100);
+  setTimeout(() => clearInterval(interval), 3000);
+}
 
-    // Conditions button click
-    conditionsButton.addEventListener('click', () => {
-        startHeartRain();
-        dialogText.textContent = "تم قبول الشروط دون نقاش ❤️\nاعملي اسكرين ورسلي لي شروطك دي عشان ابت تترسل لي";
-        dialogOverlay.classList.remove('hidden');
-    });
+// Floating messages
+const floatingMessagesContainer = document.getElementById('floating-messages');
+function showFloatingMessage(text) {
+  const el = document.createElement('div');
+  el.className = 'floating';
+  el.textContent = text;
+  el.style.left = Math.random() * 80 + 'vw';
+  el.style.top = '80vh';
+  floatingMessagesContainer.appendChild(el);
+  setTimeout(() => el.remove(), 4000);
+}
 
-    // Forgive button click
-    forgiveButton.addEventListener('click', () => {
-        startHeartRain();
-        showFloatingMessage("Yaaaaayyyy 🎉");
-    });
+// Typing detection
+const typingMessages = [
+  "موافق قبل تكملي يا ست الناس ❤️",
+  "شروطك على راسي يا حياتي",
+  "أنا راضي قبل ما أسمع",
+  "تسلمي لي يا ملاكي"
+];
+document.getElementById('conditions').addEventListener('input', () => {
+  if (!typingInterval) {
+    typingInterval = setInterval(() => {
+      const msg = typingMessages[Math.floor(Math.random() * typingMessages.length)];
+      showFloatingMessage(msg);
+    }, 1500);
+  }
+});
 
-    // Not forgive button click
-    notForgiveButton.addEventListener('click', () => {
-        const randomMessage = notForgiveMessages[Math.floor(Math.random() * notForgiveMessages.length)];
-        showFloatingMessage(randomMessage);
-    });
+// Conditions button
+document.getElementById('seeConditions').addEventListener('click', () => {
+  startHeartRain();
+  document.getElementById('modal').style.display = 'flex';
+});
+document.getElementById('closeModal').addEventListener('click', () => {
+  document.getElementById('modal').style.display = 'none';
+});
 
-    // Close dialog box
-    dialogCloseButton.addEventListener('click', () => {
-        dialogOverlay.classList.add('hidden');
-    });
+// Forgive button
+document.getElementById('forgiveBtn').addEventListener('click', () => {
+  startHeartRain();
+  showFloatingMessage("Yaaaaayyyy 🎉");
+});
+
+// Not forgive button
+const notForgiveMessages = [
+  "النبي سامحيني، توبة يا حبوبة ❤️",
+  "أنا غلطان، والله آخر مرة",
+  "من غيرك حياتي ما ليها طعم",
+  "سامحيني وابتدي صفحة جديدة",
+  "بحبك مهما حصل"
+];
+document.getElementById('notForgiveBtn').addEventListener('click', () => {
+  notForgiveMessages.forEach((msg, i) => {
+    setTimeout(() => showFloatingMessage(msg), i * 1000);
+  });
 });
