@@ -1,15 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
     // --- Initial setup and element selection ---
-    const apologyAudio = document.getElementById('apology-audio');
-    const playAudioBtn = document.getElementById('play-audio-btn');
     const conditionsTextarea = document.getElementById('conditions');
+    const showConditionsBtn = document.getElementById('show-conditions-btn');
     const forgiveBtn = document.getElementById('forgive-btn');
     const angryBtn = document.getElementById('angry-btn');
-    const angryMessage = document.getElementById('angry-message');
     const timerDisplay = document.getElementById('timer-display');
     const loveSlider = document.getElementById('love-slider');
     const loveMeterMessage = document.getElementById('love-meter-message');
     const finalAcceptanceContainer = document.getElementById('final-acceptance-container');
+    const emojiRainContainer = document.getElementById('emoji-rain-container');
 
     // --- Floating Hearts Background ---
     function createHeart() {
@@ -25,11 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     setInterval(createHeart, 300);
 
-    // --- Audio Playback ---
-    playAudioBtn.addEventListener('click', () => {
-        apologyAudio.play();
-    });
-
     // --- Forgiveness Conditions & Floating Messages ---
     const acceptancePhrases = ["موافق ❤️", "تمام 🌹", "على عيني 😍", "شرطك أوامر 💖", "خلص اعتبره تم ✨"];
     let typingTimer;
@@ -43,24 +37,16 @@ document.addEventListener('DOMContentLoaded', () => {
         msg.style.top = e.clientY + 'px';
         document.body.appendChild(msg);
 
-        // Animate and remove the message
         setTimeout(() => {
             msg.style.transform = 'translateY(-50px) scale(1.2)';
             msg.style.opacity = '0';
             setTimeout(() => msg.remove(), 2000);
         }, 100);
 
-        // Clear previous timer and set a new one
         clearTimeout(typingTimer);
         typingTimer = setTimeout(() => {
             showFinalAcceptanceMessage();
             // --- IMPORTANT: Email Sending Logic ---
-            // This is where you would send the email. This requires a backend.
-            // For example, using a service like EmailJS (https://www.emailjs.com/):
-            // emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', {
-            //     to_email: 'ahmoma212@gmail.com',
-            //     conditions: conditionsTextarea.value
-            // });
             console.log("Email to ahmoma212@gmail.com would be sent with conditions:", conditionsTextarea.value);
         }, 2000);
     });
@@ -72,7 +58,6 @@ document.addEventListener('DOMContentLoaded', () => {
         finalAcceptanceContainer.appendChild(finalMsg);
         finalMsg.style.display = 'block';
 
-        // Falling hearts/petals animation
         for (let i = 0; i < 50; i++) {
             const heart = document.createElement('span');
             heart.innerHTML = ['❤️', '🌹', '💖', '🌸'][Math.floor(Math.random() * 4)];
@@ -85,6 +70,12 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => heart.remove(), 5000);
         }
     }
+
+    // --- New "كدي انشوف شروطك دي" button logic ---
+    showConditionsBtn.addEventListener('click', () => {
+        handleForgiveAction();
+        alert('اعملي اسكرين لشروطك دي ورسليها لي عشان ابت تترسل لي');
+    });
 
     // --- Countdown Timer & Button Enabling ---
     let timeLeft = 180; // 3 minutes
@@ -104,6 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Forgiveness Buttons ---
     const angryPhrases = [
+        "النبي سامحيني، تووبة يا حبوبة",
         "يا حبيبة قلبي، سامحيني بس",
         "خلص، ما في زعل لما تعودي تضحكي",
         "أنا معاك مهما صار، بس رجاءً سامحيني",
@@ -111,9 +103,8 @@ document.addEventListener('DOMContentLoaded', () => {
         "صبرا يا غالية، سامحيني على التأخير"
     ];
 
-    forgiveBtn.addEventListener('click', () => {
+    function handleForgiveAction() {
         // Emoji rain animation
-        const emojiRainContainer = document.getElementById('emoji-rain-container');
         const emojis = ['❤️', '🌹', '😊', '😍', '💖', '🎉'];
         for (let i = 0; i < 100; i++) {
             const emoji = document.createElement('span');
@@ -126,24 +117,28 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         const message = document.createElement('h2');
         message.style.color = '#4caf50';
-        message.textContent = 'الحمد لله! شكراً على قلبك الكبير ❤️';
+        message.textContent = 'yaaaayyyyy';
         message.style.animation = 'fadeInScale 0.5s ease-out';
         forgiveBtn.parentElement.appendChild(message);
-    });
+    }
+    
+    forgiveBtn.addEventListener('click', handleForgiveAction);
 
     angryBtn.addEventListener('click', () => {
         const randomPhrase = angryPhrases[Math.floor(Math.random() * angryPhrases.length)];
-        angryMessage.textContent = randomPhrase;
-    });
+        const msg = document.createElement('div');
+        msg.classList.add('angry-floating-message');
+        msg.textContent = randomPhrase;
+        msg.style.left = Math.random() * 80 + 10 + 'vw';
+        msg.style.top = Math.random() * 80 + 10 + 'vh';
+        document.body.appendChild(msg);
 
-    // --- Memory Slideshow ---
-    const slideshowImages = document.querySelectorAll('.slideshow-image');
-    let currentSlide = 0;
-    setInterval(() => {
-        slideshowImages[currentSlide].classList.remove('active');
-        currentSlide = (currentSlide + 1) % slideshowImages.length;
-        slideshowImages[currentSlide].classList.add('active');
-    }, 5000);
+        setTimeout(() => {
+            msg.style.transform = 'translateY(-50px) scale(1.2)';
+            msg.style.opacity = '0';
+            setTimeout(() => msg.remove(), 2000);
+        }, 100);
+    });
 
     // --- Love Meter Slider ---
     const loveMeterMessages = [
