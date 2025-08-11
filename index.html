@@ -3,64 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>أنا آسف يا حبيبتي ❤️</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    <title>سامحيني يا حياتي</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+    <div class="background-container"></div>
+
     <div class="container">
-        
-        <div class="sticky-notes-container">
-            <div class="sticky-note">
-                <img src="https://via.placeholder.com/250x250/FFC0CB/FFFFFF?text=صورة+أحمد" alt="أنا">
-                <p class="caption">أنا</p>
+
+        <div class="sticky-note top-note">
+            <p>اعـمـلي اسكـريـن عشان أشوف إجابتك ❤️</p>
+        </div>
+
+        <div class="sticky-notes-grid">
+            <div class="sticky-note image-note">
+                <img src="your_image.jpg" alt="My image">
             </div>
-            <div class="sticky-note">
-                <img src="https://via.placeholder.com/250x250/FFDAB9/FFFFFF?text=صورة+حبيبتي" alt="أنتِ">
-                <p class="caption">أنتِ</p>
+            <div class="sticky-note image-note">
+                <img src="her_image.jpg" alt="My girlfriend's image">
             </div>
-            <div class="sticky-note">
-                <div class="memory-images">
-                    <img src="https://via.placeholder.com/100x100/FFFDD0/444444?text=ذكرى+1" alt="Memory 1">
-                    <img src="https://via.placeholder.com/100x100/FFFDD0/444444?text=ذكرى+2" alt="Memory 2">
-                    <img src="https://via.placeholder.com/100x100/FFFDD0/444444?text=ذكرى+3" alt="Memory 3">
-                </div>
-                <p class="caption-english">What's left of our memories, please let's keep them</p>
+            <div class="sticky-note side-by-side">
+                <img src="our_memory_1.jpg" alt="Our memory 1">
+            </div>
+            <div class="sticky-note side-by-side">
+                <img src="our_memory_2.jpg" alt="Our memory 2">
+            </div>
+            <div class="sticky-note side-by-side">
+                <img src="our_memory_3.jpg" alt="Our memory 3">
             </div>
         </div>
+        <p class="memories-text">ما تبقى من ذكرياتنا، رجاءً لنحافظ عليها</p>
 
-        <h1 class="apology-heading">أنا آسف… وبتمنى تسامحيني ❤️</h1>
-
-        <div class="input-section">
-            <label for="conditions">اكتبي شروطك عشان أسامحك 😏</label>
-            <textarea id="conditions" placeholder="اكتبي شروطك هنا..."></textarea>
-            <button id="show-conditions-btn">كدي انشوف شروطك دي</button>
-        </div>
-
-        <div class="countdown-timer">
-            وقت التفكير: <span id="timer-display" class="timer-value">3:00</span>
-            <br>
-            <small>بس أنا مستني طول عمري.</small>
-        </div>
-
-        <div class="love-meter">
-            <label for="love-slider">قديش جاهزة تسامحيني اليوم؟</label>
-            <input type="range" id="love-slider" min="0" max="10" value="0">
-            <div id="love-meter-message" class="love-meter-message"></div>
-        </div>
-        
-        <div class="buttons-container">
-            <div class="forgiveness-buttons">
-                <button class="forgive-button" id="forgive-btn" disabled>سامحتك مسامحة مبدئية ❤️</button>
-                <button class="angry-button" id="angry-btn" disabled>لسه زعلانة 😢</button>
+        <div class="apology-section">
+            <p class="apology-text">
+                أنا عارف إني غلطان، والكلام ده يمكن ما يكفيش، بس حبيت أوريكي إنك أهم واحدة في حياتي. 
+                أنا آسف على كل كلمة قولتها وكل فعل عملته ضايقك. 
+                بتمنى من كل قلبي إنك تسامحيني عشان نرجع تاني ونبتدي صفحة جديدة سوا.
+            </p>
+            <div class="apology-form">
+                <label for="conditions">اكتبي شروطك عشان أسامحك</label>
+                <textarea id="conditions" placeholder="اكتبي هنا..."></textarea>
+                <button id="conditions-button">كدي انشوف شروطك دي</button>
             </div>
         </div>
 
-        <div id="emoji-rain-container"></div>
-        <div id="final-acceptance-container"></div>
+        <div class="decision-section">
+            <button id="forgive-button">سامحتيني مسامحة مبدئية؟</button>
+            <button id="not-forgive-button">مش مسامحاك</button>
+        </div>
     </div>
-    
-    <script src="script.js" defer></script>
+
+    <div id="floating-messages-container"></div>
+    <div id="dialog-overlay" class="hidden">
+        <div id="dialog-box">
+            <p id="dialog-text"></p>
+            <button id="dialog-close">تم</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
