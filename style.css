@@ -18,6 +18,31 @@ body {
     min-height: 100vh;
 }
 
+/* Google Sign-in Overlay */
+#signin-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+#google-signin-btn {
+    padding: 15px 30px;
+    font-size: 1.5em;
+    background-color: #fff;
+    color: #4285F4;
+    border: 1px solid #4285F4;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: var(--primary-font);
+}
+
 /* Background gradient and animations */
 .background {
     position: fixed;
@@ -105,6 +130,19 @@ body {
     font-weight: bold;
 }
 
+.memory-images-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.memory-images-container img {
+    width: 45%;
+    border-radius: 5px;
+}
+
 /* Main Apology Text */
 .apology-text {
     margin: 40px 0;
@@ -114,12 +152,6 @@ body {
     font-size: 3em;
     color: var(--accent-color);
     font-family: var(--secondary-font);
-}
-
-.apology-text p {
-    font-size: 1.2em;
-    font-family: var(--primary-font);
-    color: var(--text-color);
 }
 
 /* Countdown Timer */
@@ -197,13 +229,18 @@ body {
     to { transform: scale(1.05); }
 }
 
-/* Forgiveness Buttons */
-.buttons-container {
-    margin: 20px 0;
+/* Forgiveness Buttons - Bottom */
+.buttons-container-bottom {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 600px;
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    justify-content: center;
     gap: 15px;
+    padding: 0 20px;
 }
 
 .forgive-btn, .sad-btn {
@@ -243,14 +280,6 @@ button:disabled {
     opacity: 0.6;
 }
 
-.sad-message {
-    margin-top: 15px;
-    font-size: 1.2em;
-    color: var(--accent-color);
-    font-family: var(--secondary-font);
-    font-weight: bold;
-}
-
 /* Emoji Rain Animation */
 #emoji-rain {
     position: fixed;
@@ -273,65 +302,9 @@ button:disabled {
     100% { transform: translateY(110vh); opacity: 0; }
 }
 
-/* Slideshow */
-.slideshow-container {
-    max-width: 600px;
-    position: relative;
-    margin: 50px auto;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
-    overflow: hidden;
-}
-
-.slideshow-item {
-    display: none;
-    text-align: center;
-}
-
-.slideshow-item img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-}
-
-.fade {
-    animation-name: fade;
-    animation-duration: 1.5s;
-}
-
-@keyframes fade {
-    from { opacity: .4 }
-    to { opacity: 1 }
-}
-
-/* Audio Player */
-.audio-container {
-    margin: 20px 0;
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    align-items: center;
-}
-
-.audio-container button {
-    padding: 10px 20px;
-    font-size: 1em;
-    border-radius: 30px;
-    border: 2px solid var(--accent-color);
-    background-color: white;
-    color: var(--accent-color);
-    cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-.audio-container button:hover {
-    background-color: var(--accent-color);
-    color: white;
-}
-
 /* Love Meter */
 .love-meter-container {
-    margin: 40px 0;
+    margin: 40px 0 100px; /* Add margin to not overlap with buttons */
     padding: 20px;
     background-color: rgba(255, 255, 255, 0.7);
     border-radius: 10px;
@@ -395,8 +368,14 @@ button:disabled {
         font-size: 2em;
     }
     
-    .apology-text p, .countdown-container p {
+    .countdown-container p {
         font-size: 1em;
+    }
+    
+    .buttons-container-bottom {
+        flex-direction: column;
+        bottom: 10px;
+        gap: 10px;
     }
     
     .forgive-btn, .sad-btn {
