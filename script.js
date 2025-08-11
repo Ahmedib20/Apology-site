@@ -20,13 +20,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Forgiveness Conditions Input ---
     const conditionsTextarea = document.getElementById('conditions-textarea');
-    const acceptanceMessageContainer = document.getElementById('acceptance-message');
-    const acceptancePhrases = ["موافق ❤️", "تمام 🌹", "على عيني 😍", "شرطك أوامر 💖", "خلص اعتبره تم ✨"];
-    
+    const sendConditionsBtn = document.getElementById('send-conditions-btn');
+    const sadBtn = document.getElementById('sad-btn');
+
     // --- Countdown Timer ---
     const timerElement = document.getElementById('timer');
     const forgiveBtn = document.getElementById('forgive-btn');
-    const sadBtn = document.getElementById('sad-btn');
     let timeLeft = 180; // 3 minutes
 
     const countdown = setInterval(() => {
@@ -38,6 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
             clearInterval(countdown);
             forgiveBtn.disabled = false;
             sadBtn.disabled = false;
+            sendConditionsBtn.disabled = false;
         }
         
         timeLeft--;
@@ -49,19 +49,12 @@ document.addEventListener('DOMContentLoaded', () => {
         "خلص، ما في زعل لما تعودي تضحكي",
         "أنا معاك مهما صار، بس رجاءً سامحيني",
         "قلبك كبير وأنا مستنيها تنفتح",
-        "والنبي لتسامحيني، خلااااصصص تووببة ياحبووبة"
+        "والنبي لتسامحيني، خلااااصصص تووببة ياحبووبة",
+        "الله يخليكِ، ما تستاهل الزعل ده",
+        "الزعل يقتلني، ابتسمي لي بس"
     ];
     
-    forgiveBtn.addEventListener('click', () => {
-        createFallingAnimation('emoji', 100);
-        // This function now uses the mailto link to send the email
-        sendEmailWithConditions(conditionsTextarea.value, true); 
-    });
-    
-    sadBtn.addEventListener('click', () => {
-        createFloatingMessage(sadMessages[Math.floor(Math.random() * sadMessages.length)]);
-    });
-
+    // Function to create a floating message
     const createFloatingMessage = (text) => {
         const message = document.createElement('div');
         message.classList.add('floating-message');
@@ -82,6 +75,24 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 2000);
     };
 
+    // New button functionality for "رسلي شروطك دي انشوفها"
+    sendConditionsBtn.addEventListener('click', () => {
+        sendEmailWithConditions(conditionsTextarea.value);
+        // Add a visual cue that the email is being prepared
+        alert('سيتم إرسال شروطك إلى البريد الإلكتروني. يرجى الموافقة على إرسال الرسالة.');
+    });
+
+    // New button functionality for "تسامحيني مسامحة مبدئية؟"
+    forgiveBtn.addEventListener('click', () => {
+        createFallingAnimation('emoji', 100);
+        sendEmailWithInitialForgiveness();
+    });
+    
+    // Function for "لسه زعلانة" button
+    sadBtn.addEventListener('click', () => {
+        createFloatingMessage(sadMessages[Math.floor(Math.random() * sadMessages.length)]);
+    });
+
     const createFallingAnimation = (type, count) => {
         const emojiRain = document.getElementById('emoji-rain');
         const emojis = (type === 'emoji') ? ['❤️', '🌹', '😊', '🥳', '✨'] : ['❤️'];
@@ -101,15 +112,20 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
     
-    // --- New Email Sending Function (using mailto) ---
-    const sendEmailWithConditions = (conditions, isForgiven) => {
-        const forgivenessStatus = isForgiven ? 'سامحتني ❤️' : 'لسه زعلانة 😢';
+    // --- New Email Sending Functions (using mailto) ---
+    // Function for "رسلي شروطك دي انشوفها" button
+    const sendEmailWithConditions = (conditions) => {
         const emailBody = `
-            Status: ${forgivenessStatus}
-            Conditions from your partner:
+            شروط مسامحتي:
             ${conditions}
         `;
-        window.location.href = `mailto:ahmoma212@gmail.com?subject=تحديث من موقع الاعتذار&body=${encodeURIComponent(emailBody)}`;
+        window.location.href = `mailto:ahmoma212@gmail.com?subject=شروط المسامحة&body=${encodeURIComponent(emailBody)}`;
+    };
+
+    // Function for "تسامحيني مسامحة مبدئية؟" button
+    const sendEmailWithInitialForgiveness = () => {
+        const emailBody = 'رسالة من منوية: مسامحة مبدئية.';
+        window.location.href = `mailto:ahmoma212@gmail.com?subject=هات الخمر يا غلام، منوية سامحتني&body=${encodeURIComponent(emailBody)}`;
     };
 
     // --- Love Meter Slider ---
