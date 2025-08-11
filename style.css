@@ -242,4 +242,140 @@ body {
     color: white;
     width: 100%;
     max-width: 300px;
-    box-shadow: 0 5px 1
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+}
+
+.forgive-btn {
+    background-color: #4CAF50;
+}
+
+.forgive-btn:hover:not(:disabled) {
+    background-color: #45a049;
+    transform: translateY(-3px);
+}
+
+.sad-btn {
+    background-color: #f44336;
+}
+
+.sad-btn:hover:not(:disabled) {
+    background-color: #da3329;
+    transform: translateY(-3px);
+}
+
+button:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* Emoji Rain Animation */
+#emoji-rain {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 100;
+}
+
+.emoji {
+    position: absolute;
+    font-size: 2em;
+    animation: emoji-fall linear;
+}
+
+@keyframes emoji-fall {
+    0% { transform: translateY(-10vh); opacity: 1; }
+    100% { transform: translateY(110vh); opacity: 0; }
+}
+
+/* Love Meter */
+.love-meter-container {
+    margin: 40px 0 120px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+
+.love-meter-container label {
+    font-size: 1.3em;
+    margin-bottom: 10px;
+    display: block;
+}
+
+#love-meter {
+    width: 80%;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 15px;
+    background: #ddd;
+    outline: none;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+    border-radius: 5px;
+}
+
+#love-meter:hover {
+    opacity: 1;
+}
+
+#love-meter::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    background: var(--accent-color);
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+#love-meter::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    background: var(--accent-color);
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+#love-meter-message {
+    margin-top: 10px;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .sticky-notes-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .sticky-note {
+        width: 90%;
+    }
+
+    .apology-text h1 {
+        font-size: 2em;
+    }
+
+    .countdown-container p {
+        font-size: 1em;
+    }
+
+    .buttons-container-bottom {
+        flex-direction: column;
+        bottom: 0;
+        padding: 10px;
+        gap: 10px;
+    }
+
+    .forgive-btn, .sad-btn {
+        font-size: 1.2em;
+        padding: 12px 25px;
+    }
+}
