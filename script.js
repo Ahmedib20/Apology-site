@@ -1,385 +1,159 @@
-:root {
-    --primary-font: 'Cairo', sans-serif;
-    --secondary-font: 'Amiri', serif;
-    --pink-light: #FFB6C1;
-    --peach-light: #FFDAB9;
-    --cream-light: #FFF8DC;
-    --accent-color: #E91E63;
-    --text-color: #333;
-}
+document.addEventListener('DOMContentLoaded', () => {
 
-body {
-    margin: 0;
-    font-family: var(--primary-font);
-    text-align: center;
-    color: var(--text-color);
-    overflow-x: hidden;
-    position: relative;
-    min-height: 100vh;
-}
+    // --- Google Sign-in & Authentication ---
+    // This is a front-end placeholder. A real implementation requires a server-side component.
+    const signinOverlay = document.getElementById('signin-overlay');
+    const googleSigninBtn = document.getElementById('google-signin-btn');
+    const mainContainer = document.querySelector('.container');
+    const buttonsContainer = document.querySelector('.buttons-container-bottom');
 
-/* Google Sign-in Overlay */
-#signin-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 999;
-}
+    googleSigninBtn.addEventListener('click', () => {
+        // Simulate a successful login. In a real app, this would initiate the Google Auth flow.
+        // Once authenticated, the user's details would be available to the app.
+        setTimeout(() => {
+            signinOverlay.style.display = 'none';
+            mainContainer.style.display = 'block';
+            buttonsContainer.style.display = 'flex';
+        }, 1000);
+    });
 
-#google-signin-btn {
-    padding: 15px 30px;
-    font-size: 1.5em;
-    background-color: #fff;
-    color: #4285F4;
-    border: 1px solid #4285F4;
-    border-radius: 5px;
-    cursor: pointer;
-    font-family: var(--primary-font);
-}
 
-/* Background gradient and animations */
-.background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, var(--pink-light), var(--peach-light), var(--cream-light));
-    z-index: -1;
-    overflow: hidden;
-}
+    // --- Background Floating Hearts ---
+    const background = document.querySelector('.background');
+    const createHeart = () => {
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+        background.appendChild(heart);
+        setTimeout(() => heart.remove(), 5000);
+    };
+    setInterval(createHeart, 300);
 
-.heart {
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    background-color: rgba(255, 255, 255, 0.5);
-    transform: rotate(-45deg);
-    pointer-events: none;
-    animation: float-heart linear infinite;
-    z-index: 1;
-}
+    // --- Sticky Notes Rotation ---
+    document.querySelectorAll('.sticky-note').forEach((note, index) => {
+        note.style.setProperty('--i', index);
+        note.style.transform = `rotate(${Math.random() * 6 - 3}deg)`;
+    });
 
-.heart::before, .heart::after {
-    content: '';
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background-color: inherit;
-}
-
-.heart::before {
-    top: -10px;
-    left: 0;
-}
-
-.heart::after {
-    top: 0;
-    left: 10px;
-}
-
-@keyframes float-heart {
-    0% { transform: translateY(0) rotate(-45deg); opacity: 1; }
-    100% { transform: translateY(-1000px) rotate(-45deg); opacity: 0; }
-}
-
-.container {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 20px;
-    position: relative;
-    z-index: 2;
-}
-
-/* Sticky Notes Section */
-.sticky-notes-container {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    margin: 40px 0;
-    flex-wrap: wrap;
-}
-
-.sticky-note {
-    width: 200px;
-    background-color: var(--cream-light);
-    padding: 15px;
-    border-radius: 5px;
-    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
-    transform: rotate(calc(var(--i) * 3deg - 3deg));
-    transition: transform 0.3s ease;
-}
-
-.sticky-note img {
-    width: 100%;
-    height: auto;
-    border-radius: 3px;
-}
-
-.sticky-note p {
-    font-family: var(--secondary-font);
-    font-size: 1.2em;
-    margin: 10px 0 0;
-    font-weight: bold;
-}
-
-.memory-images-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
-    justify-content: center;
-    margin-top: 10px;
-}
-
-.memory-images-container img {
-    width: 45%;
-    border-radius: 5px;
-}
-
-/* Main Apology Text */
-.apology-text {
-    margin: 40px 0;
-}
-
-.apology-text h1 {
-    font-size: 3em;
-    color: var(--accent-color);
-    font-family: var(--secondary-font);
-}
-
-/* Countdown Timer */
-.countdown-container {
-    margin: 20px 0;
-    font-size: 1.2em;
-    color: var(--text-color);
-}
-
-#timer {
-    font-weight: bold;
-    color: var(--accent-color);
-}
-
-/* Conditions Section */
-.conditions-container {
-    margin: 30px 0;
-    position: relative;
-}
-
-.conditions-container label {
-    display: block;
-    font-size: 1.3em;
-    margin-bottom: 10px;
-}
-
-#conditions-textarea {
-    width: 100%;
-    max-width: 600px;
-    height: 100px;
-    padding: 15px;
-    font-size: 1em;
-    border: 2px solid var(--accent-color);
-    border-radius: 10px;
-    background-color: rgba(255, 255, 255, 0.7);
-    resize: vertical;
-    font-family: var(--primary-font);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    transition: box-shadow 0.3s;
-}
-
-#conditions-textarea:focus {
-    outline: none;
-    box-shadow: 0 0 15px var(--accent-color);
-}
-
-/* Floating Acceptance Messages */
-.floating-message {
-    position: absolute;
-    padding: 10px 15px;
-    background-color: var(--accent-color);
-    color: white;
-    border-radius: 20px;
-    white-space: nowrap;
-    opacity: 0;
-    animation: float-up 2s forwards;
-    pointer-events: none;
-}
-
-@keyframes float-up {
-    0% { transform: translateY(0); opacity: 1; }
-    100% { transform: translateY(-100px); opacity: 0; }
-}
-
-#acceptance-message {
-    font-size: 1.5em;
-    font-weight: bold;
-    margin-top: 20px;
-    color: var(--accent-color);
-    animation: pulse 1s infinite alternate;
-}
-
-@keyframes pulse {
-    from { transform: scale(1); }
-    to { transform: scale(1.05); }
-}
-
-/* Forgiveness Buttons - Bottom */
-.buttons-container-bottom {
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100%;
-    max-width: 600px;
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    padding: 0 20px;
-}
-
-.forgive-btn, .sad-btn {
-    padding: 15px 30px;
-    font-size: 1.5em;
-    border-radius: 50px;
-    border: none;
-    cursor: pointer;
-    transition: transform 0.2s, background-color 0.2s;
-    font-family: var(--primary-font);
-    color: white;
-    width: 100%;
-    max-width: 300px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-}
-
-.forgive-btn {
-    background-color: #4CAF50;
-}
-
-.forgive-btn:hover:not(:disabled) {
-    background-color: #45a049;
-    transform: translateY(-3px);
-}
-
-.sad-btn {
-    background-color: #f44336;
-}
-
-.sad-btn:hover:not(:disabled) {
-    background-color: #da3329;
-    transform: translateY(-3px);
-}
-
-button:disabled {
-    cursor: not-allowed;
-    opacity: 0.6;
-}
-
-/* Emoji Rain Animation */
-#emoji-rain {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 100;
-}
-
-.emoji {
-    position: absolute;
-    font-size: 2em;
-    animation: emoji-fall linear;
-}
-
-@keyframes emoji-fall {
-    0% { transform: translateY(-10vh); opacity: 1; }
-    100% { transform: translateY(110vh); opacity: 0; }
-}
-
-/* Love Meter */
-.love-meter-container {
-    margin: 40px 0 100px; /* Add margin to not overlap with buttons */
-    padding: 20px;
-    background-color: rgba(255, 255, 255, 0.7);
-    border-radius: 10px;
-}
-
-.love-meter-container label {
-    font-size: 1.3em;
-    margin-bottom: 10px;
-    display: block;
-}
-
-#love-meter {
-    width: 80%;
-    -webkit-appearance: none;
-    appearance: none;
-    height: 15px;
-    background: #ddd;
-    outline: none;
-    opacity: 0.7;
-    transition: opacity 0.2s;
-    border-radius: 5px;
-}
-
-#love-meter:hover {
-    opacity: 1;
-}
-
-#love-meter::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 25px;
-    height: 25px;
-    background: var(--accent-color);
-    cursor: pointer;
-    border-radius: 50%;
-}
-
-#love-meter::-moz-range-thumb {
-    width: 25px;
-    height: 25px;
-    background: var(--accent-color);
-    cursor: pointer;
-    border-radius: 50%;
-}
-
-#love-meter-message {
-    margin-top: 10px;
-    font-size: 1.2em;
-    font-weight: bold;
-    color: var(--text-color);
-}
-
-/* Mobile Responsiveness */
-@media (max-width: 768px) {
-    .sticky-notes-container {
-        flex-direction: column;
-        align-items: center;
-    }
+    // --- Forgiveness Conditions Input ---
+    const conditionsTextarea = document.getElementById('conditions-textarea');
+    const acceptanceMessageContainer = document.getElementById('acceptance-message');
+    const acceptancePhrases = ["موافق ❤️", "تمام 🌹", "على عيني 😍", "شرطك أوامر 💖", "خلص اعتبره تم ✨"];
     
-    .apology-text h1 {
-        font-size: 2em;
-    }
+    // Deleting the automatic floating message from typing, as per the new request.
+    // The text area is now just for input.
+
+    // --- Countdown Timer ---
+    const timerElement = document.getElementById('timer');
+    const forgiveBtn = document.getElementById('forgive-btn');
+    const sadBtn = document.getElementById('sad-btn');
+    let timeLeft = 180; // 3 minutes
+
+    const countdown = setInterval(() => {
+        const minutes = Math.floor(timeLeft / 60);
+        const seconds = timeLeft % 60;
+        timerElement.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+        
+        if (timeLeft <= 0) {
+            clearInterval(countdown);
+            forgiveBtn.disabled = false;
+            sadBtn.disabled = false;
+        }
+        
+        timeLeft--;
+    }, 1000);
+
+    // --- Forgiveness Buttons ---
+    const sadMessages = [
+        "يا حبيبة قلبي، سامحيني بس",
+        "خلص، ما في زعل لما تعودي تضحكي",
+        "أنا معاك مهما صار، بس رجاءً سامحيني",
+        "قلبك كبير وأنا مستنيها تنفتح",
+        "والنبي لتسامحيني، خلااااصصص تووببة ياحبووبة"
+    ];
     
-    .countdown-container p {
-        font-size: 1em;
-    }
+    // Changing the forgive button's functionality
+    forgiveBtn.addEventListener('click', () => {
+        createFallingAnimation('emoji', 100);
+        // This is the new action for the "رسلي شروطك دي انشوفها" button
+        sendEmailWithConditions(conditionsTextarea.value, true); 
+    });
     
-    .buttons-container-bottom {
-        flex-direction: column;
-        bottom: 10px;
-        gap: 10px;
-    }
+    // Updating the sad button to show floating messages
+    sadBtn.addEventListener('click', () => {
+        createFloatingMessage(sadMessages[Math.floor(Math.random() * sadMessages.length)]);
+        // Optional: Send a notification email when she is still sad
+        // sendEmailWithConditions('لسه زعلانة', false);
+    });
+
+    const createFloatingMessage = (text) => {
+        const message = document.createElement('div');
+        message.classList.add('floating-message');
+        message.textContent = text;
+        
+        // Randomize position near the button
+        const buttonRect = sadBtn.getBoundingClientRect();
+        const topPos = buttonRect.top + window.scrollY - Math.random() * 50 - 50;
+        const leftPos = buttonRect.left + window.scrollX + Math.random() * buttonRect.width - 50;
+
+        message.style.top = `${topPos}px`;
+        message.style.left = `${leftPos}px`;
+        
+        document.body.appendChild(message);
+        
+        setTimeout(() => {
+            message.remove();
+        }, 2000);
+    };
+
+    const createFallingAnimation = (type, count) => {
+        const emojiRain = document.getElementById('emoji-rain');
+        const emojis = (type === 'emoji') ? ['❤️', '🌹', '😊', '🥳', '✨'] : ['❤️'];
+        
+        for (let i = 0; i < count; i++) {
+            const emoji = document.createElement('div');
+            emoji.classList.add('emoji');
+            emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+            emoji.style.left = Math.random() * 100 + 'vw';
+            emoji.style.animationDuration = Math.random() * 5 + 3 + 's';
+            emoji.style.animationDelay = Math.random() * 2 + 's';
+            emojiRain.appendChild(emoji);
+            
+            setTimeout(() => {
+                emoji.remove();
+            }, 8000);
+        }
+    };
     
-    .forgive-btn, .sad-btn {
-        font-size: 1.2em;
-        padding: 12px 25px;
-    }
-}
+    // --- New Email Sending Function ---
+    const sendEmailWithConditions = (conditions, isForgiven) => {
+        const forgivenessStatus = isForgiven ? 'سامحتني ❤️' : 'لسه زعلانة 😢';
+        const emailBody = `
+            Status: ${forgivenessStatus}
+            Conditions from your partner:
+            ${conditions}
+        `;
+        // This is a front-end placeholder. A real email service requires a backend.
+        // window.location.href = `mailto:ahmoma212@gmail.com?subject=تحديث من موقع الاعتذار&body=${encodeURIComponent(emailBody)}`;
+        alert('An email would be sent to your Gmail address with the conditions. In a real app, this would happen via a server-side script.');
+        console.log('Email sent:', emailBody);
+    };
+
+
+    // --- Love Meter Slider ---
+    const loveMeter = document.getElementById('love-meter');
+    const loveMeterMessage = document.getElementById('love-meter-message');
+    
+    loveMeter.addEventListener('input', () => {
+        const value = loveMeter.value;
+        if (value >= 0 && value <= 3) {
+            loveMeterMessage.textContent = "لسه بعيد، بس ما نيأس.";
+        } else if (value >= 4 && value <= 7) {
+            loveMeterMessage.textContent = "قريبين من بعض.";
+        } else {
+            loveMeterMessage.textContent = "أنا مبسوط جداً! سامحتيني؟ ❤️";
+        }
+    });
+
+});
