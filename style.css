@@ -166,11 +166,37 @@ body {
     font-family: var(--primary-font);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.3s;
+    margin-bottom: 15px;
 }
 
 #conditions-textarea:focus {
     outline: none;
     box-shadow: 0 0 15px var(--accent-color);
+}
+
+.send-conditions-btn {
+    padding: 15px 30px;
+    font-size: 1.5em;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    font-family: var(--primary-font);
+    width: 100%;
+    max-width: 300px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+.send-conditions-btn:hover:not(:disabled) {
+    background-color: #45a049;
+    transform: translateY(-3px);
+}
+
+.send-conditions-btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
 }
 
 /* Floating Acceptance Messages */
