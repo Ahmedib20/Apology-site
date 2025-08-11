@@ -12,28 +12,35 @@
 </head>
 <body>
 
+    <div id="signin-overlay">
+        <button id="google-signin-btn">تسجيل الدخول باستخدام جوجل</button>
+    </div>
+
     <div class="background"></div>
 
-    <div class="container">
+    <div class="container" style="display: none;">
         
         <div class="sticky-notes-container">
             <div class="sticky-note">
-                <img src="https://via.placeholder.com/200x200?text=أنا" alt="My photo">
-                <p>أنا</p>
-            </div>
-            <div class="sticky-note">
-                <img src="https://via.placeholder.com/200x200?text=أنت" alt="Her photo">
+                <img src="IMG-20250714-WA0024.jpg" alt="Her photo">
                 <p>أنتِ</p>
             </div>
             <div class="sticky-note">
-                <img src="https://via.placeholder.com/200x200?text=ذكرياتنا" alt="Our memory">
-                <p>ذكرياتنا</p>
+                <img src="IMG-20250807-WA0036.jpg" alt="My photo">
+                <p>أنا</p>
+            </div>
+            <div class="sticky-note">
+                <p>What's left of our memories, please let's keep them</p>
+                <div class="memory-images-container">
+                    <img src="memory1.jpg" alt="Memory 1">
+                    <img src="memory2.jpg" alt="Memory 2">
+                    <img src="memory3.jpg" alt="Memory 3">
+                </div>
             </div>
         </div>
         
         <div class="apology-text">
             <h1>أنا آسف… وبتمنى تسامحيني ❤️</h1>
-            <p>هذه لحظاتنا اللي ما بدي أضيعها.</p>
         </div>
 
         <div class="countdown-container">
@@ -46,35 +53,6 @@
             <div id="acceptance-message"></div>
         </div>
 
-        <div class="buttons-container">
-            <button id="forgive-btn" class="forgive-btn" disabled>سامحتك ❤️</button>
-            <button id="sad-btn" class="sad-btn" disabled>لسه زعلانة 😢</button>
-            <div id="sad-message" class="sad-message"></div>
-        </div>
-
-        <div class="slideshow-container">
-            <div class="slideshow-item fade">
-                <img src="https://via.placeholder.com/600x400?text=ذكرى+1" alt="Memory 1">
-            </div>
-            <div class="slideshow-item fade">
-                <img src="https://via.placeholder.com/600x400?text=ذكرى+2" alt="Memory 2">
-            </div>
-            <div class="slideshow-item fade">
-                <img src="https://via.placeholder.com/600x400?text=ذكرى+3" alt="Memory 3">
-            </div>
-        </div>
-
-        <div class="audio-container">
-            <button id="audio-btn">
-                <i class="fas fa-microphone"></i> اسمع اعتذاري
-            </button>
-            <button id="mute-btn">
-                <i class="fas fa-volume-up"></i>
-            </button>
-            <audio id="apology-audio" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" preload="auto"></audio>
-            <audio id="bg-music" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" loop preload="auto"></audio>
-        </div>
-        
         <div class="love-meter-container">
             <label for="love-meter">قديش جاهزة تسامحيني اليوم؟</label>
             <input type="range" id="love-meter" min="0" max="10" value="0">
@@ -82,9 +60,14 @@
         </div>
     </div>
     
+    <div class="buttons-container-bottom" style="display: none;">
+        <button id="forgive-btn" class="forgive-btn" disabled>رسلي شروطك دي انشوفها</button>
+        <button id="sad-btn" class="sad-btn" disabled>لسه زعلانة 😢</button>
+    </div>
+
     <div id="emoji-rain"></div>
 
     <script src="script.js"></script>
-    
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 </body>
 </html>
