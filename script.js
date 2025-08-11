@@ -3,8 +3,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const submitConditionsBtn = document.getElementById('submit-conditions-btn');
     const forgiveBtn = document.getElementById('forgive-btn');
     const notForgiveBtn = document.getElementById('not-forgive-btn');
-    const dialogOverlay = document.getElementById('dialog-overlay');
-    const dialogMessage = document.getElementById('dialog-message');
     const floatingMessagesContainer = document.getElementById('floating-messages-container');
     let floatingMessageInterval;
     let heartRainInterval;
@@ -12,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const apologyMessages = [
         "شروطك على راسي يا حياتي",
         "أنا راضي قبل ما أسمع",
-        "تسلمي لي يا ملاكي"
+        "سمعا وطاعة يا حبيبتي"
     ];
 
     const notForgiveMessages = [
@@ -74,18 +72,20 @@ document.addEventListener('DOMContentLoaded', () => {
     submitConditionsBtn.addEventListener('click', () => {
         startHeartRain();
         clearInterval(floatingMessageInterval);
-        dialogMessage.innerHTML = "تم قبول الشروط دون نقاش ❤️<br>اعملي اسكرين ورسلي لي شروطك دي عشان ابت تترسل لي";
-        dialogOverlay.style.display = 'flex';
+        
+        // Display acceptance message as a floating message instead of a dialog
+        const acceptanceMessage = "تم قبول الشروط دون نقاش ❤️";
+        createFloatingMessage(acceptanceMessage);
+
+        // Display instruction message separately
+        const instructionMessage = "اعملي اسكرين ورسلي لي شروطك دي عشان ابت تترسل لي";
+        setTimeout(() => {
+            createFloatingMessage(instructionMessage);
+        }, 2000); // Small delay to show after the first message
         
         setTimeout(() => {
             stopHeartRain();
         }, 5000);
-    });
-
-    dialogOverlay.addEventListener('click', (e) => {
-        if (e.target === dialogOverlay) {
-            dialogOverlay.style.display = 'none';
-        }
     });
 
     forgiveBtn.addEventListener('click', () => {
