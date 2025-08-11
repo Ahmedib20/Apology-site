@@ -1,4 +1,3 @@
-
 :root {
     --pink: #ffafc0;
     --red: #ff5e6c;
@@ -54,8 +53,9 @@ body {
     font-weight: bold;
     max-width: 700px;
     background: var(--pink);
-    color: var(--white);
     padding: 30px;
+    /* This is the new line to change the text color */
+    color: black;
 }
 
 .sticky-note.pink { background-color: var(--pink); }
@@ -196,30 +196,8 @@ button:hover {
     pointer-events: none;
 }
 
-#dialog-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1001;
-    display: none;
-}
-
-#dialog-box {
-    background: var(--white);
-    padding: 30px;
-    border-radius: 15px;
-    max-width: 400px;
-    text-align: center;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    font-size: 1.5rem;
-    color: var(--red);
-    line-height: 1.5;
+.floating-message.screenshot-instruction {
+    color: black;
 }
 
 @keyframes float-up {
